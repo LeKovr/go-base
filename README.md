@@ -6,7 +6,7 @@ Set of base packages for golang applications.
 
 Current version has a
 
-* logger - [![GoDoc](https://godoc.org/github.com/LeKovr/go-base/logger?status.svg)](https://godoc.org/github.com/LeKovr/go-base/logger)
+* [logger](logger/) - wrapper lib for app logging
 
 
 License
