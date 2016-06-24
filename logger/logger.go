@@ -18,16 +18,11 @@ type Log struct {
 	file *os.File
 }
 
-// Options is a program flags sample
+// Flags is a package flags sample
 // in form ready for use with github.com/jessevdk/go-flags
-// It can be used in global flag struct:
-//   type options struct {
-//     logger.Options
-//     ...other flags...
-//   }
-type Options struct {
-	LogDest  string `short:"d" long:"dest" description:"Log destination (STDERR)"`
-	LogLevel string `short:"l" long:"level" description:"Log level [warn|info|debug]" default:"warn"`
+type Flags struct {
+	LogDest  string `group:"log" short:"d" long:"dest" description:"Log destination (STDERR)"`
+	LogLevel string `group:"log" short:"l" long:"level" description:"Log level [warn|info|debug]" default:"warn"`
 }
 
 // WithFields adds a map into logger output
