@@ -1,4 +1,4 @@
-// database - general database access package
+// Package database - general database access
 // This is a wrapper on github.com/go-xorm/xorm
 package database
 
