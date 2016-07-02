@@ -21,8 +21,8 @@ type Log struct {
 // Flags is a package flags sample
 // in form ready for use with github.com/jessevdk/go-flags
 type Flags struct {
-	LogDest  string `long:"logdest"  description:"Log destination (STDERR)"`
-	LogLevel string `long:"loglevel" description:"Log level [warn|info|debug]" default:"warn"`
+	Dest  string `long:"log_dest"  description:"Log destination (STDERR)"`
+	Level string `long:"log_level" description:"Log level [warn|info|debug]" default:"warn"`
 }
 
 // WithFields adds a map into logger output
