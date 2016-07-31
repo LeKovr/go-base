@@ -6,6 +6,7 @@ package logger
 
 import (
 	"github.com/Sirupsen/logrus"
+	"io/ioutil"
 	"os"
 )
 
@@ -54,6 +55,16 @@ func Level(s string) func(logger *Log) error {
 	}
 }
 
+// TimeStamp adds timestamp in log output
+func TimeStamp(logger *Log) error {
+	return logger.setTimeStamp()
+}
+
+// Disable turns logging off
+func Disable(logger *Log) error {
+	return logger.setDisabled()
+}
+
 // -----------------------------------------------------------------------------
 // Internal setters
 
@@ -67,7 +78,6 @@ func (logger *Log) setDest(s string) error {
 		}
 		logger.Logger.Out = w
 		logger.file = w
-		logger.Logger.Formatter = &logrus.TextFormatter{DisableColors: true, TimestampFormat: "2006-01-02 15:04:05.000"}
 	}
 	return nil
 }
@@ -78,6 +88,16 @@ func (logger *Log) setLevel(s string) error {
 		return err
 	}
 	logger.Logger.Level = lev
+	return nil
+}
+
+func (logger *Log) setTimeStamp() error {
+	logger.Logger.Formatter = &logrus.TextFormatter{FullTimestamp: true, TimestampFormat: "2006-01-02 15:04:05.000"}
+	return nil
+}
+
+func (logger *Log) setDisabled() error {
+	logger.Logger.Out = ioutil.Discard
 	return nil
 }
 
