@@ -3,8 +3,7 @@ package mailer
 import (
 	"crypto/tls"
 	"gopkg.in/gomail.v2"
-
-	"github.com/LeKovr/go-base/logger"
+	"log"
 )
 
 // -----------------------------------------------------------------------------
@@ -24,21 +23,21 @@ type Flags struct {
 
 // App is a package general type
 type App struct {
-	Log    *logger.Log
+	Log    *log.Logger
 	Config *Flags
 }
 
 // New creates mailer object
 // Configuration should be set via functional options
-func New(cfg *Flags, log *logger.Log, options ...func(a *App) error) (*App, error) {
-	a := App{Config: cfg, Log: log.WithField("in", "mailer")}
+func New(logger *log.Logger, cfg *Flags, options ...func(a *App) error) (*App, error) {
+	a := App{Config: cfg, Log: logger}
 	for _, option := range options {
 		err := option(&a)
 		if err != nil {
 			return nil, err
 		}
 	}
-	a.Log.Debugf("Mail config: %+v", cfg)
+	a.Log.Printf("debug: Mail config: %+v", cfg)
 	return &a, nil
 }
 
@@ -46,7 +45,7 @@ func New(cfg *Flags, log *logger.Log, options ...func(a *App) error) (*App, erro
 func (a App) Send(email, name, subject, buf string, files []string) (err error) {
 
 	if a.Config.From == "" {
-		a.Log.Warn("Mail config field FROM does not set. Skip mailing")
+		a.Log.Printf("warn: Mail config field FROM does not set. Skip mailing")
 		return
 	}
 	msg := gomail.NewMessage()
