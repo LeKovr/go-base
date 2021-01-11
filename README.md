@@ -21,4 +21,4 @@ License
 
 The MIT License (MIT), see [LICENSE](LICENSE).
 
-Copyright (c) 2016 Alexey Kovrizhkin ak@elfire.ru
+Copyright (c) 2016 Aleksey Kovrizhkin lekovr@gmail.com
